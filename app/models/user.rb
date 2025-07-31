@@ -25,7 +25,7 @@ class User < ApplicationRecord
   # Password validations (Sorcery)
   validates :password, length: { minimum: 8 }, if: -> { new_record? || changes[:crypted_password] }
   validates :password, format: {
-    with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+    with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*\z/,
     message: "は大文字、小文字、数字を含む必要があります"
   }, if: -> { new_record? || changes[:crypted_password] }
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
