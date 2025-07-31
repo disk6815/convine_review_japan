@@ -1,0 +1,52 @@
+ja:
+  hello: "こんにちは"
+  
+  application:
+    not_authenticated: "ログインが必要です"
+  
+  users:
+    new:
+      title: "新規登録"
+      submit: "登録"
+    create:
+      success: "アカウントが正常に作成されました"
+    form:
+      name: "名前"
+      email: "メールアドレス"
+      password: "パスワード"
+      password_confirmation: "パスワード（確認）"
+      nationality: "国籍"
+      language: "言語"
+      select_nationality: "国籍を選択してください"
+      select_language: "言語を選択してください"
+  
+  sessions:
+    new:
+      title: "ログイン"
+      submit: "ログイン"
+    create:
+      success: "ログインしました"
+      failure: "メールアドレスまたはパスワードが正しくありません"
+    destroy:
+      success: "ログアウトしました"
+    form:
+      email: "メールアドレス"
+      password: "パスワード"
+  
+  nationalities:
+    japan: "日本"
+    korea: "韓国"
+  
+  languages:
+    japanese: "日本語"
+    korean: "韓国語"
+    english: "英語"
+  
+  errors:
+    messages:
+      record_invalid: "入力内容に問題があります"
+      required: "は必須項目です"
+      blank: "は入力してください"
+      too_long: "は%{count}文字以内で入力してください"
+      taken: "は既に使用されています"
+      invalid: "は正しい形式で入力してください" 

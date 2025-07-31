@@ -18,8 +18,13 @@
         <option value="ja" <%= params[:lang] == 'ja' ? 'selected' : '' %>>🇯🇵 Japanese</option>
         <option value="ko" <%= params[:lang] == 'ko' ? 'selected' : '' %>>🇰🇷 Korean</option>
       </select>
-      <a href="#" class="glass-btn-glass px-5 py-2 rounded-lg font-bold text-blue-700 shadow hover:bg-blue-100/60 hover:text-blue-900 transition text-center border border-blue-200 backdrop-blur">Login</a>
-      <a href="#" class="glass-btn-glass px-5 py-2 rounded-lg font-bold text-green-700 shadow hover:bg-green-100/60 hover:text-green-900 transition text-center border border-green-200 backdrop-blur">Sign up</a>
+      <% if current_user %>
+        <span class="text-sm text-gray-700"><%= current_user.name %></span>
+        <%= button_to "Logout", logout_path, method: :delete, class: "glass-btn-glass px-5 py-2 rounded-lg font-bold text-red-700 shadow hover:bg-red-100/60 hover:text-red-900 transition text-center border border-red-200 backdrop-blur bg-transparent" %>
+      <% else %>
+        <%= link_to "Login", login_path, class: "glass-btn-glass px-5 py-2 rounded-lg font-bold text-blue-700 shadow hover:bg-blue-100/60 hover:text-blue-900 transition text-center border border-blue-200 backdrop-blur" %>
+        <%= link_to "Sign up", signup_path, class: "glass-btn-glass px-5 py-2 rounded-lg font-bold text-green-700 shadow hover:bg-green-100/60 hover:text-green-900 transition text-center border border-green-200 backdrop-blur" %>
+      <% end %>
     </div>
     <!-- ハンバーガーメニュー（スマホのみ表示） -->
     <button id="mobile-menu-button" class="md:hidden absolute right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-white/70 text-blue-600 shadow-lg hover:bg-blue-100 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-200 transition" aria-label="メニューを開く">
@@ -46,8 +51,13 @@
             <option value="ja" <%= params[:lang] == 'ja' ? 'selected' : '' %>>🇯🇵 Japanese</option>
             <option value="ko" <%= params[:lang] == 'ko' ? 'selected' : '' %>>🇰🇷 Korean</option>
           </select>
-          <a href="#" class="block w-full px-4 py-2 rounded-lg glass-btn-glass font-bold text-blue-700 shadow hover:bg-blue-100/60 hover:text-blue-900 transition text-center border border-blue-200 backdrop-blur">Login</a>
-          <a href="#" class="block w-full px-4 py-2 rounded-lg glass-btn-glass font-bold text-green-700 shadow hover:bg-green-100/60 hover:text-green-900 transition text-center border border-green-200 backdrop-blur">Sign up</a>
+          <% if current_user %>
+            <span class="text-sm text-gray-700 text-center py-2"><%= current_user.name %></span>
+            <%= button_to "Logout", logout_path, method: :delete, class: "block w-full px-4 py-2 rounded-lg glass-btn-glass font-bold text-red-700 shadow hover:bg-red-100/60 hover:text-red-900 transition text-center border border-red-200 backdrop-blur bg-transparent" %>
+          <% else %>
+            <%= link_to "Login", login_path, class: "block w-full px-4 py-2 rounded-lg glass-btn-glass font-bold text-blue-700 shadow hover:bg-blue-100/60 hover:text-blue-900 transition text-center border border-blue-200 backdrop-blur" %>
+            <%= link_to "Sign up", signup_path, class: "block w-full px-4 py-2 rounded-lg glass-btn-glass font-bold text-green-700 shadow hover:bg-green-100/60 hover:text-green-900 transition text-center border border-green-200 backdrop-blur" %>
+          <% end %>
         </div>
       </div>
       <div class="flex-1 bg-black/40" onclick="document.getElementById('mobile-menu').classList.add('hidden')"></div>

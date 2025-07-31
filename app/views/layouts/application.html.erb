@@ -19,7 +19,10 @@
   </head>
 
   <body>
-    <%= render 'shared/header' %>
+    <%= render 'shared/flash_messages' %>
+    <% if show_header? %>
+      <%= render 'shared/header' %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
