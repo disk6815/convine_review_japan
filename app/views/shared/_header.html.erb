@@ -1,0 +1,73 @@
+<!-- Header -->
+<header class="glass-header-glass2 border-b border-gray-200 shadow-lg sticky top-0 z-20">
+  <div class="max-w-6xl mx-auto flex items-center justify-between px-4 md:px-6 py-2 md:py-2.5 relative">
+    <!-- ロゴ（中央寄せ・スマホ時） -->
+    <div class="flex-1 flex justify-center md:justify-start items-center">
+      <%= image_tag 'log.svg', alt: 'サービスロゴ', class: 'w-28 h-auto md:w-36 lg:w-48' %>
+    </div>
+    <!-- ナビゲーション（中央揃え、テキストリンク） -->
+    <nav class="hidden md:flex flex-1 justify-center space-x-8">
+      <a href="#" class="nav-link-glass">Home</a>
+      <a href="#" class="nav-link-glass">Reviews</a>
+      <a href="#" class="nav-link-glass">List</a>
+      <a href="#" class="nav-link-glass">Posts</a>
+    </nav>
+    <!-- 言語切替＋ログイン（右寄せ） -->
+    <div class="hidden md:flex items-center space-x-2 flex-shrink-0 justify-end">
+      <select onchange="window.location.search='?lang='+this.value" class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200 bg-white shadow">
+        <option value="ja" <%= params[:lang] == 'ja' ? 'selected' : '' %>>🇯🇵 Japanese</option>
+        <option value="ko" <%= params[:lang] == 'ko' ? 'selected' : '' %>>🇰🇷 Korean</option>
+      </select>
+      <a href="#" class="glass-btn-glass px-5 py-2 rounded-lg font-bold text-blue-700 shadow hover:bg-blue-100/60 hover:text-blue-900 transition text-center border border-blue-200 backdrop-blur">Login</a>
+      <a href="#" class="glass-btn-glass px-5 py-2 rounded-lg font-bold text-green-700 shadow hover:bg-green-100/60 hover:text-green-900 transition text-center border border-green-200 backdrop-blur">Sign up</a>
+    </div>
+    <!-- ハンバーガーメニュー（スマホのみ表示） -->
+    <button id="mobile-menu-button" class="md:hidden absolute right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-white/70 text-blue-600 shadow-lg hover:bg-blue-100 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-200 transition" aria-label="メニューを開く">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+    <!-- モバイル用メニュー -->
+    <div id="mobile-menu" class="fixed inset-0 z-30 flex flex-col md:hidden hidden">
+      <div class="w-full shadow-2xl p-6 pt-4 flex flex-col space-y-4 animate-slide-down border border-white/30 bg-white/95 rounded-b-xl">
+        <button id="mobile-menu-close" class="self-end mb-2 p-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none transition" aria-label="メニューを閉じる">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <nav class="flex flex-col space-y-2 text-center">
+          <a href="#" class="mobile-nav-link-glass">Home</a>
+          <a href="#" class="mobile-nav-link-glass">Reviews</a>
+          <a href="#" class="mobile-nav-link-glass">List</a>
+          <a href="#" class="mobile-nav-link-glass">Posts</a>
+        </nav>
+        <div class="flex flex-col space-y-2">
+          <select onchange="window.location.search='?lang='+this.value" class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200 bg-white shadow">
+            <option value="ja" <%= params[:lang] == 'ja' ? 'selected' : '' %>>🇯🇵 Japanese</option>
+            <option value="ko" <%= params[:lang] == 'ko' ? 'selected' : '' %>>🇰🇷 Korean</option>
+          </select>
+          <a href="#" class="block w-full px-4 py-2 rounded-lg glass-btn-glass font-bold text-blue-700 shadow hover:bg-blue-100/60 hover:text-blue-900 transition text-center border border-blue-200 backdrop-blur">Login</a>
+          <a href="#" class="block w-full px-4 py-2 rounded-lg glass-btn-glass font-bold text-green-700 shadow hover:bg-green-100/60 hover:text-green-900 transition text-center border border-green-200 backdrop-blur">Sign up</a>
+        </div>
+      </div>
+      <div class="flex-1 bg-black/40" onclick="document.getElementById('mobile-menu').classList.add('hidden')"></div>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var menuBtn = document.getElementById('mobile-menu-button');
+        var menu = document.getElementById('mobile-menu');
+        var closeBtn = document.getElementById('mobile-menu-close');
+        if(menuBtn && menu) {
+          menuBtn.addEventListener('click', function() {
+            menu.classList.remove('hidden');
+          });
+        }
+        if(closeBtn && menu) {
+          closeBtn.addEventListener('click', function() {
+            menu.classList.add('hidden');
+          });
+        }
+      });
+    </script>
+  </div>
+</header> 

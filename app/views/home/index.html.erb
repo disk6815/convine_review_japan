@@ -1,163 +1,72 @@
-<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-  <!-- ヘッダー -->
-  <header class="bg-white shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center py-6">
-        <div class="flex items-center">
-          <h1 class="text-2xl font-bold text-gray-900">Convine Review Japan</h1>
+<div class="min-h-screen font-sans glass-bg-glass">
+  <!-- Main -->
+  <main class="max-w-6xl mx-auto px-2 sm:px-4 md:px-6 py-8 md:py-12">
+    <!-- Top 3 Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-10">
+      <!-- Reviews -->
+      <div class="glass-card-blue rounded-xl shadow-lg p-4 md:p-6 flex flex-col items-center border-t-4 border-blue-200 hover:shadow-2xl transition glass-card-glass">
+        <div class="flex items-center mb-2">
+          <span class="text-base md:text-lg font-bold mr-2 text-blue-700">Reviews</span>
+          <span class="text-blue-300 text-xl">🔍</span>
         </div>
-        <nav class="hidden md:flex space-x-8">
-          <a href="#" class="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">ホーム</a>
-          <a href="#" class="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">サービス</a>
-          <a href="#" class="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">会社概要</a>
-          <a href="#" class="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">お問い合わせ</a>
-        </nav>
+        <img src="<%= asset_path('review_index.png') %>" alt="Reviews" class="rounded-lg w-full h-24 sm:h-28 md:h-32 object-cover mb-2 glass-img-glass">
+      </div>
+      <!-- Post -->
+      <div class="glass-card-yellow rounded-xl shadow-lg p-4 md:p-6 flex flex-col items-center border-t-4 border-yellow-200 hover:shadow-2xl transition glass-card-glass">
+        <div class="flex items-center mb-2">
+          <span class="text-base md:text-lg font-bold mr-2 text-yellow-700">Post</span>
+          <span class="text-yellow-300 text-xl">✏️</span>
+        </div>
+        <img src="<%= asset_path('post.jpg') %>" alt="Post" class="rounded-lg w-full h-24 sm:h-28 md:h-32 object-cover mb-2 glass-img-glass">
+        <span class="text-xs md:text-sm text-gray-500 text-center">Share your review with everyone!</span>
+      </div>
+      <!-- List -->
+      <div class="glass-card-green rounded-xl shadow-lg p-4 md:p-6 flex flex-col items-center border-t-4 border-green-200 hover:shadow-2xl transition glass-card-glass">
+        <div class="flex items-center mb-2">
+          <span class="text-base md:text-lg font-bold mr-2 text-green-700">List</span>
+          <span class="text-green-300 text-xl">✅</span>
+        </div>
+        <img src="<%= asset_path('list.jpg') %>" alt="List" class="rounded-lg w-full h-24 sm:h-28 md:h-32 object-cover mb-2 glass-img-glass">
+        <span class="text-xs md:text-sm text-gray-500 text-center">Keep track of your favorite items</span>
       </div>
     </div>
-  </header>
 
-  <!-- メインコンテンツ -->
-  <main>
-    <!-- ヒーローセクション -->
-    <section class="relative py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-          <h2 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            日本最大級の
-            <span class="text-indigo-600">レビュープラットフォーム</span>
-          </h2>
-          <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            信頼できるレビューで、より良い選択を。Convine Review Japanは、ユーザーの声を集め、
-            より良いサービスと商品の提供をサポートします。
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <button class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300">
-              今すぐ始める
-            </button>
-            <button class="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition duration-300">
-              詳細を見る
-            </button>
-          </div>
+    <!-- Bottom 2 Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-10">
+      <!-- Post History -->
+      <div class="glass-card-yellow rounded-xl shadow-lg p-4 md:p-6 border-l-4 border-yellow-200 hover:shadow-2xl transition flex flex-col items-center md:items-start glass-card-glass">
+        <div class="flex items-center mb-2">
+          <span class="text-sm md:text-base font-bold mr-2 text-yellow-700">Post History</span>
+          <span class="text-yellow-300 text-xl">📄</span>
         </div>
+        <img src="<%= asset_path('mypost.jpg') %>" alt="Post History" class="rounded-lg w-full h-20 md:h-24 object-cover mb-2 glass-img-glass">
       </div>
-    </section>
+      <!-- Service Info -->
+      <div class="glass-card-blue rounded-xl shadow-lg p-4 md:p-6 border-l-4 border-blue-200 hover:shadow-2xl transition flex flex-col items-center md:items-start glass-card-glass">
+        <div class="flex items-center mb-2">
+          <span class="text-sm md:text-base font-bold mr-2 text-blue-700">Service Info</span>
+          <span class="text-blue-300 text-xl">🌏</span>
+        </div>
+        <img src="<%= asset_path('service.jpg') %>" alt="Service Info" class="rounded-lg w-full h-20 md:h-24 object-cover mb-2 glass-img-glass">
+        <span class="text-xs md:text-sm text-gray-500 text-center md:text-left">Discover all the features for your convenience store experience.</span>
+      </div>
+    </div>
 
-    <!-- 特徴セクション -->
-    <section class="py-20 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h3 class="text-3xl font-bold text-gray-900 mb-4">なぜConvine Review Japanなのか</h3>
-          <p class="text-lg text-gray-600">信頼性と使いやすさを追求したプラットフォーム</p>
-        </div>
-        
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="text-center p-6">
-            <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </div>
-            <h4 class="text-xl font-semibold text-gray-900 mb-2">信頼性</h4>
-            <p class="text-gray-600">厳格な審査システムにより、信頼できるレビューのみを掲載</p>
-          </div>
-          
-          <div class="text-center p-6">
-            <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-              </svg>
-            </div>
-            <h4 class="text-xl font-semibold text-gray-900 mb-2">高速性</h4>
-            <p class="text-gray-600">最新の技術により、高速で快適なユーザー体験を提供</p>
-          </div>
-          
-          <div class="text-center p-6">
-            <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-              </svg>
-            </div>
-            <h4 class="text-xl font-semibold text-gray-900 mb-2">コミュニティ</h4>
-            <p class="text-gray-600">活発なユーザーコミュニティによる豊富なレビュー情報</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 統計セクション -->
-    <section class="py-20 bg-indigo-600">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-4 gap-8 text-center">
-          <div>
-            <div class="text-4xl font-bold text-white mb-2">10,000+</div>
-            <div class="text-indigo-200">レビュー数</div>
-          </div>
-          <div>
-            <div class="text-4xl font-bold text-white mb-2">5,000+</div>
-            <div class="text-indigo-200">ユーザー数</div>
-          </div>
-          <div>
-            <div class="text-4xl font-bold text-white mb-2">500+</div>
-            <div class="text-indigo-200">企業パートナー</div>
-          </div>
-          <div>
-            <div class="text-4xl font-bold text-white mb-2">99%</div>
-            <div class="text-indigo-200">満足度</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTAセクション -->
-    <section class="py-20 bg-gray-50">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h3 class="text-3xl font-bold text-gray-900 mb-4">今すぐ始めませんか？</h3>
-        <p class="text-lg text-gray-600 mb-8">
-          無料でアカウントを作成して、信頼できるレビュープラットフォームを体験してください。
-        </p>
-        <button class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300">
-          無料で始める
-        </button>
-      </div>
-    </section>
+    <!-- Login Prompt Section -->
+    <div class="glass-login rounded-lg border border-blue-200 p-5 md:p-7 text-center flex flex-col items-center shadow-lg glass-card-glass">
+      <span class="text-base md:text-lg font-semibold text-blue-800 mb-2">Login to unlock all features!</span>
+      <span class="text-sm md:text-base text-blue-600 mb-4">You can only browse reviews before logging in.</span>
+      <a href="#" class="px-5 md:px-8 py-2 rounded-lg bg-blue-600 text-white font-bold shadow hover:bg-blue-700 transition w-full sm:w-auto">Login</a>
+    </div>
   </main>
-
-  <!-- フッター -->
-  <footer class="bg-gray-900 text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="grid md:grid-cols-4 gap-8">
-        <div>
-          <h4 class="text-lg font-semibold mb-4">Convine Review Japan</h4>
-          <p class="text-gray-400">信頼できるレビュープラットフォーム</p>
-        </div>
-        <div>
-          <h5 class="font-semibold mb-4">サービス</h5>
-          <ul class="space-y-2 text-gray-400">
-            <li><a href="#" class="hover:text-white">レビュー投稿</a></li>
-            <li><a href="#" class="hover:text-white">企業向けサービス</a></li>
-            <li><a href="#" class="hover:text-white">API</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5 class="font-semibold mb-4">会社情報</h5>
-          <ul class="space-y-2 text-gray-400">
-            <li><a href="#" class="hover:text-white">会社概要</a></li>
-            <li><a href="#" class="hover:text-white">採用情報</a></li>
-            <li><a href="#" class="hover:text-white">プレスリリース</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5 class="font-semibold mb-4">サポート</h5>
-          <ul class="space-y-2 text-gray-400">
-            <li><a href="#" class="hover:text-white">ヘルプセンター</a></li>
-            <li><a href="#" class="hover:text-white">お問い合わせ</a></li>
-            <li><a href="#" class="hover:text-white">プライバシーポリシー</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-        <p>&copy; 2024 Convine Review Japan. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-</div> 
+  <style>
+    .glass-img-glass {
+      box-shadow: 0 2px 16px 0 rgba(255,255,255,0.18), 0 1.5px 8px 0 rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.18);
+      border-radius: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.13);
+      backdrop-filter: blur(4px) saturate(1.1);
+      -webkit-backdrop-filter: blur(4px) saturate(1.1);
+    }
+  </style>
+</div>
