@@ -1,0 +1,96 @@
+<div class="min-h-screen font-sans glass-bg-glass py-3">
+  <!-- ヘッダー部分（bodyと同じ背景色） -->
+  <div class="text-center">
+    <div class="flex flex-col items-center">
+      <%= image_tag 'log.svg', alt: 'サービスロゴ', class: 'w-48 h-auto mb-4' %>
+    </div>
+  </div>
+
+  <!-- フォーム部分（ガラス風の背景で中央配置） -->
+  <div class="flex justify-center px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full">
+      <div class="glass-form-glass bg-white/20 backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_0_rgba(37,99,235,0.37)] p-10 border border-white/30 border-t-2 border-l-2 border-b-0 border-r-0" style="box-shadow: 0 8px 32px 0 rgba(37,99,235,0.37), 0 1.5px 0 0 rgba(255,255,255,0.25) inset;">
+        <div class="text-center mb-10">
+          <h2 class="text-4xl font-extrabold text-gray-900 mb-2 tracking-wide drop-shadow-lg"><%= t('users.new.title') %></h2>
+        </div>
+
+        <style>
+          /* 入力欄・セレクトボックスのフォーカス時のデザインを強調 */
+          .custom-input:focus, .custom-select:focus {
+            outline: none;
+            border-color: #2563eb !important; /* 青色 */
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.18), 0 2px 12px 0 rgba(37,99,235,0.13);
+            background: rgba(255,255,255,0.7);
+            transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
+          }
+          .custom-input:hover, .custom-select:hover {
+            border-color: #60a5fa !important; /* 薄い青 */
+            background: rgba(255,255,255,0.85);
+          }
+        </style>
+
+        <%= form_with model: @user, url: signup_path, local: true, class: "space-y-7" do |form| %>
+          <% if @user.errors.any? %>
+            <div class="bg-red-50/70 border border-red-200 rounded-xl p-4 mb-7 shadow-lg backdrop-blur">
+              <div class="text-red-800 text-sm">
+                <ul class="list-disc list-inside space-y-1">
+                  <% @user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          <% end %>
+
+          <div>
+            <%= form.label :name, t('users.form.name'), class: "block text-sm font-semibold text-gray-700 mb-2" %>
+            <%= form.text_field :name, class: "custom-input w-full px-5 py-3 rounded-xl border border-white/30 bg-white/30/60 backdrop-blur-lg placeholder-gray-400 focus:ring-0 focus:border-blue-500 shadow-[0_2px_8px_0_rgba(37,99,235,0.10)] transition", placeholder: "Value", autocomplete: "off" %>
+          </div>
+
+          <div>
+            <%= form.label :nationality, t('users.form.nationality'), class: "block text-sm font-semibold text-gray-700 mb-2" %>
+            <%= form.select :nationality,
+                User.nationalities.keys.map { |k| [t("nationalities.#{k}"), k] },
+                { include_blank: false },
+                { class: "custom-select w-full px-5 py-3 rounded-xl border border-white/30 bg-white/30/60 backdrop-blur-lg focus:ring-0 focus:border-blue-500 shadow-[0_2px_8px_0_rgba(37,99,235,0.10)] transition" } %>
+          </div>
+
+          <div>
+            <%= form.label :language, t('users.form.language'), class: "block text-sm font-semibold text-gray-700 mb-2" %>
+            <%= form.select :language,
+                User.languages.keys.map { |k| [t("languages.#{k}"), k] },
+                { include_blank: false },
+                { class: "custom-select w-full px-5 py-3 rounded-xl border border-white/30 bg-white/30/60 backdrop-blur-lg focus:ring-0 focus:border-blue-500 shadow-[0_2px_8px_0_rgba(37,99,235,0.10)] transition" } %>
+          </div>
+
+          <div>
+            <%= form.label :email, t('users.form.email'), class: "block text-sm font-semibold text-gray-700 mb-2" %>
+            <%= form.email_field :email, class: "custom-input w-full px-5 py-3 rounded-xl border border-white/30 bg-white/30/60 backdrop-blur-lg placeholder-gray-400 focus:ring-0 focus:border-blue-500 shadow-[0_2px_8px_0_rgba(37,99,235,0.10)] transition", placeholder: "example@email.com", autocomplete: "off" %>
+          </div>
+
+          <div>
+            <%= form.label :password, t('users.form.password'), class: "block text-sm font-semibold text-gray-700 mb-2" %>
+            <%= form.password_field :password, class: "custom-input w-full px-5 py-3 rounded-xl border border-white/30 bg-white/30/60 backdrop-blur-lg placeholder-gray-400 focus:ring-0 focus:border-blue-500 shadow-[0_2px_8px_0_rgba(37,99,235,0.10)] transition", placeholder: "Value", autocomplete: "off" %>
+          </div>
+
+          <div>
+            <%= form.label :password_confirmation, t('users.form.password_confirmation'), class: "block text-sm font-semibold text-gray-700 mb-2" %>
+            <%= form.password_field :password_confirmation, class: "custom-input w-full px-5 py-3 rounded-xl border border-white/30 bg-white/30/60 backdrop-blur-lg placeholder-gray-400 focus:ring-0 focus:border-blue-500 shadow-[0_2px_8px_0_rgba(37,99,235,0.10)] transition", placeholder: "Value", autocomplete: "off" %>
+          </div>
+
+          <div class="pt-5 space-y-3">
+            <%= form.submit t('users.new.submit'), class: "w-full py-3 px-4 rounded-xl font-bold text-white bg-gradient-to-r from-blue-300/80 via-blue-400/80 to-blue-600/80 hover:from-blue-400/90 hover:via-blue-600/90 hover:to-blue-800/90 shadow-[0_4px_24px_0_rgba(37,99,235,0.25)] border border-blue-200/60 backdrop-blur-lg transition duration-200 tracking-wide" %>
+            <%= link_to "TOPへ", root_path, class: "block w-full py-3 px-4 rounded-xl font-bold text-blue-700 bg-gradient-to-r from-white/70 via-blue-100/40 to-white/70 border border-blue-200/40 hover:bg-blue-50/60 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-offset-2 transition duration-200 text-center shadow" %>
+          </div>
+        <% end %>
+
+        <div class="text-center mt-8">
+          <p class="text-sm text-gray-600 drop-shadow">
+            既にアカウントをお持ちですか？
+            <%= link_to t('sessions.new.title'), login_path, class: "text-blue-600 hover:text-blue-500 font-medium underline underline-offset-2" %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

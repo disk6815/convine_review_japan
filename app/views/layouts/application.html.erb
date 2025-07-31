@@ -19,7 +19,9 @@
   </head>
 
   <body>
-    <%= render 'shared/header' %>
+    <% if show_header? %>
+      <%= render 'shared/header' %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
