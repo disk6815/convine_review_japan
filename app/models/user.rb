@@ -38,10 +38,10 @@ class User < ApplicationRecord
   }
 
   # Name format validation
-  validates :name, format: {
-    with: /\A[ぁ-んァ-ヶー가-힣a-zA-Z0-9_\s]+\z/,
-    message: "は日本語、英語、韓国語、数字、アンダーバー、スペースのみ使用可能です"
-  }
+  # validates :name, format: {
+  #   with: /\A[a-zA-Z0-9_\s\u3040-\u309F\u30A0-\u30FF\uAC00-\uD7AF]+\z/u,
+  #   message: "は日本語、英語、韓国語、数字、アンダーバー、スペースのみ使用可能です"
+  # }
 
   # Callbacks
   before_validation :normalize_email
