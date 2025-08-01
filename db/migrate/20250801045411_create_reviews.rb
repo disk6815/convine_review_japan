@@ -6,7 +6,6 @@ class CreateReviews < ActiveRecord::Migration[7.2]
       t.float :rating
       t.text :body
       t.references :user, null: false, foreign_key: true
-      t.references :product, null: true, foreign_key: true
 
       t.timestamps
     end
