@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   before_action :require_login
 
-  helper_method :show_header?
+  helper_method :show_header?, :user_signed_in?, :current_user
 
   private
 
@@ -14,5 +14,19 @@ class ApplicationController < ActionController::Base
 
   def show_header?
     ![ "sessions", "users" ].include?(controller_name) || ![ "new", "create" ].include?(action_name)
+  end
+
+  def user_signed_in?
+    current_user.present?
+  end
+
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+  end
+
+  def authenticate_user!
+    unless current_user
+      redirect_to login_path, alert: "ログインが必要です"
+    end
   end
 end

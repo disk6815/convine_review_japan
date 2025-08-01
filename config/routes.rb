@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reviews
   # Authentication routes
   get "signup", to: "users#new", as: "signup"
   post "signup", to: "users#create"

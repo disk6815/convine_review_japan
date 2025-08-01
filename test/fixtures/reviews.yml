@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  convenience_store_name: MyString
+  product_name: MyString
+  rating: 1.5
+  body: MyText
+  user: one
+  product: one
+
+two:
+  convenience_store_name: MyString
+  product_name: MyString
+  rating: 1.5
+  body: MyText
+  user: two
+  product: two
