@@ -137,10 +137,14 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+// Turboに対応したイベントリスナー
+function initializeRatingSlider() {
+  console.log('Rating slider initialization started');
   const ratingSlider = document.getElementById('review_rating_slider');
   const ratingDisplay = document.getElementById('rating-display');
   const ratingStars = document.getElementById('rating-stars');
+  
+  console.log('Elements found:', { ratingSlider, ratingDisplay, ratingStars });
   
   if (ratingSlider && ratingDisplay && ratingStars) {
     // 星を表示する関数
@@ -192,9 +196,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // スライダー変更時の処理
     ratingSlider.addEventListener('input', function() {
       const rating = parseFloat(this.value);
+      console.log('Slider value changed:', rating);
       ratingDisplay.textContent = rating;
       updateStars(rating);
     });
   }
-});
+}
+
+// DOMContentLoadedとTurboの両方に対応
+document.addEventListener('DOMContentLoaded', initializeRatingSlider);
+document.addEventListener('turbo:load', initializeRatingSlider);
+document.addEventListener('turbo:render', initializeRatingSlider);
 </script>
