@@ -20,7 +20,13 @@
       </select>
       <% if current_user %>
         <span class="text-sm text-gray-700"><%= current_user.name %></span>
-        <%= button_to "Logout", logout_path, method: :delete, class: "glass-btn-glass px-5 py-2 rounded-lg font-bold text-red-700 shadow hover:bg-red-100/60 hover:text-red-900 transition text-center border border-red-200 backdrop-blur bg-transparent" %>
+        <%= button_to "Logout", logout_path, 
+            method: :delete, 
+            data: { 
+              turbo_confirm: "本当にログアウトしますか？\n\nログアウトすると、再度ログインが必要になります。",
+              turbo_method: :delete
+            },
+            class: "glass-btn-glass px-5 py-2 rounded-lg font-bold text-red-700 shadow hover:bg-red-100/60 hover:text-red-900 transition text-center border border-red-200 backdrop-blur bg-transparent" %>
       <% else %>
         <%= link_to "Login", login_path, class: "glass-btn-glass px-5 py-2 rounded-lg font-bold text-blue-700 shadow hover:bg-blue-100/60 hover:text-blue-900 transition text-center border border-blue-200 backdrop-blur" %>
         <%= link_to "Sign up", signup_path, class: "glass-btn-glass px-5 py-2 rounded-lg font-bold text-green-700 shadow hover:bg-green-100/60 hover:text-green-900 transition text-center border border-green-200 backdrop-blur" %>
@@ -53,7 +59,13 @@
           </select>
           <% if current_user %>
             <span class="text-sm text-gray-700 text-center py-2"><%= current_user.name %></span>
-            <%= button_to "Logout", logout_path, method: :delete, class: "block w-full px-4 py-2 rounded-lg glass-btn-glass font-bold text-red-700 shadow hover:bg-red-100/60 hover:text-red-900 transition text-center border border-red-200 backdrop-blur bg-transparent" %>
+            <%= button_to "Logout", logout_path, 
+                method: :delete, 
+                data: { 
+                  turbo_confirm: "本当にログアウトしますか？\n\nログアウトすると、再度ログインが必要になります。",
+                  turbo_method: :delete
+                },
+                class: "block w-full px-4 py-2 rounded-lg glass-btn-glass font-bold text-red-700 shadow hover:bg-red-100/60 hover:text-red-900 transition text-center border border-red-200 backdrop-blur bg-transparent" %>
           <% else %>
             <%= link_to "Login", login_path, class: "block w-full px-4 py-2 rounded-lg glass-btn-glass font-bold text-blue-700 shadow hover:bg-blue-100/60 hover:text-blue-900 transition text-center border border-blue-200 backdrop-blur" %>
             <%= link_to "Sign up", signup_path, class: "block w-full px-4 py-2 rounded-lg glass-btn-glass font-bold text-green-700 shadow hover:bg-green-100/60 hover:text-green-900 transition text-center border border-green-200 backdrop-blur" %>
