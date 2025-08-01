@@ -23,5 +23,8 @@ module Myapp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    
+    # Use npm instead of bun for cssbundling-rails
+    ENV["CSSBUNDLING_PACKAGE_MANAGER"] = "npm"
   end
 end
