@@ -9,4 +9,10 @@ Rails.application.config.assets.version = "1.0"
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
-# Rails.application.config.assets.precompile += %w[ admin.js admin.css ]
+# Rails.application.config.assets.precompile += %w( admin.js admin.css )
+
+# Configure jsbundling-rails and cssbundling-rails to use npm
+Rails.application.config.after_initialize do
+  ENV["JSBUNDLING_PACKAGE_MANAGER"] = "npm"
+  ENV["CSSBUNDLING_PACKAGE_MANAGER"] = "npm"
+end
