@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
+  # Associations
+  has_many :reviews, dependent: :destroy
+
   # Sorcery virtual attributes
   attr_accessor :password_confirmation
 

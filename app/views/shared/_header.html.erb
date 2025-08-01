@@ -7,8 +7,8 @@
     </div>
     <!-- ナビゲーション（中央揃え、テキストリンク） -->
     <nav class="hidden md:flex flex-1 justify-center space-x-8">
-      <a href="#" class="nav-link-glass">Home</a>
-      <a href="#" class="nav-link-glass">Reviews</a>
+      <%= link_to root_path, class: "nav-link-glass" do %>Home<% end %>
+      <%= link_to reviews_path, class: "nav-link-glass" do %>Reviews<% end %>
       <a href="#" class="nav-link-glass">List</a>
       <a href="#" class="nav-link-glass">Posts</a>
     </nav>
@@ -41,8 +41,8 @@
           </svg>
         </button>
         <nav class="flex flex-col space-y-2 text-center">
-          <a href="#" class="mobile-nav-link-glass">Home</a>
-          <a href="#" class="mobile-nav-link-glass">Reviews</a>
+          <%= link_to root_path, class: "mobile-nav-link-glass" do %>Home<% end %>
+          <%= link_to reviews_path, class: "mobile-nav-link-glass" do %>Reviews<% end %>
           <a href="#" class="mobile-nav-link-glass">List</a>
           <a href="#" class="mobile-nav-link-glass">Posts</a>
         </nav>
@@ -80,4 +80,4 @@
       });
     </script>
   </div>
-</header> 
+</header>
