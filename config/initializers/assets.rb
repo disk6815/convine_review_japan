@@ -15,14 +15,14 @@ Rails.application.config.assets.version = "1.0"
 Rails.application.config.after_initialize do
   ENV["JSBUNDLING_PACKAGE_MANAGER"] = "npm"
   ENV["CSSBUNDLING_PACKAGE_MANAGER"] = "npm"
-  
+
   # Force npm for cssbundling-rails
   if defined?(CssbundlingRails)
     CssbundlingRails.configure do |config|
       config.package_manager = "npm"
     end
   end
-  
+
   # Force npm for jsbundling-rails
   if defined?(JsbundlingRails)
     JsbundlingRails.configure do |config|
