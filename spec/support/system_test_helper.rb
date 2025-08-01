@@ -28,4 +28,4 @@ end
 
 RSpec.configure do |config|
   config.include SystemTestHelper, type: :system
-end 
+end

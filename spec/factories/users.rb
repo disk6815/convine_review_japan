@@ -46,4 +46,4 @@ FactoryBot.define do
       name { "A" * 51 } # 最大文字数超過
     end
   end
-end 
+end

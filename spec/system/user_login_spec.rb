@@ -17,14 +17,14 @@ RSpec.describe 'User Login', type: :system do
 
     it '有効な情報でログインできる' do
       user # ユーザーを作成
-      
+
       visit login_path
-      
+
       fill_in 'メールアドレス', with: 'test@example.com'
       fill_in 'パスワード', with: 'Password123'
-      
+
       click_button 'ログイン'
-      
+
       expect(page).to have_current_path(root_path)
       expect(page).to have_content('ログインしました')
       expect(page).to have_content('User1')
@@ -32,37 +32,37 @@ RSpec.describe 'User Login', type: :system do
 
     it '無効なメールアドレスでログインするとエラーが表示される' do
       user # ユーザーを作成
-      
+
       visit login_path
-      
+
       fill_in 'メールアドレス', with: 'wrong@example.com'
       fill_in 'パスワード', with: 'Password123'
-      
+
       click_button 'ログイン'
-      
+
       expect(page).to have_content('ログイン')
       expect(page).to have_content('メールアドレスまたはパスワードが正しくありません')
     end
 
     it '無効なパスワードでログインするとエラーが表示される' do
       user # ユーザーを作成
-      
+
       visit login_path
-      
+
       fill_in 'メールアドレス', with: 'test@example.com'
       fill_in 'パスワード', with: 'wrongpassword'
-      
+
       click_button 'ログイン'
-      
+
       expect(page).to have_content('ログイン')
       expect(page).to have_content('メールアドレスまたはパスワードが正しくありません')
     end
 
     it '空のフィールドでログインするとエラーが表示される' do
       visit login_path
-      
+
       click_button 'ログイン'
-      
+
       expect(page).to have_content('ログイン')
       expect(page).to have_content('メールアドレスまたはパスワードが正しくありません')
     end
@@ -71,16 +71,16 @@ RSpec.describe 'User Login', type: :system do
   describe 'ログアウト' do
     it 'ログイン後にログアウトできる' do
       user # ユーザーを作成
-      
+
       visit login_path
       fill_in 'メールアドレス', with: 'test@example.com'
       fill_in 'パスワード', with: 'Password123'
       click_button 'ログイン'
-      
+
       expect(page).to have_content('User1')
-      
+
       click_button 'Logout'
-      
+
       expect(page).to have_current_path(root_path)
       expect(page).to have_content('ログアウトしました')
       expect(page).to have_content('Login')
@@ -97,12 +97,12 @@ RSpec.describe 'User Login', type: :system do
 
     it 'ログイン後にTOPページにアクセスできる' do
       user # ユーザーを作成
-      
+
       visit login_path
       fill_in 'メールアドレス', with: 'test@example.com'
       fill_in 'パスワード', with: 'Password123'
       click_button 'ログイン'
-      
+
       visit root_path
       expect(page).to have_current_path(root_path)
       expect(page).to have_content('User1')
@@ -134,12 +134,12 @@ RSpec.describe 'User Login', type: :system do
 
     it 'ログイン後はヘッダーにユーザー名とLogoutが表示される' do
       user # ユーザーを作成
-      
+
       visit login_path
       fill_in 'メールアドレス', with: 'test@example.com'
       fill_in 'パスワード', with: 'Password123'
       click_button 'ログイン'
-      
+
       expect(page).to have_content('User1')
       expect(page).to have_content('Logout')
       expect(page).not_to have_content('Login')
@@ -150,26 +150,26 @@ RSpec.describe 'User Login', type: :system do
   describe 'フラッシュメッセージ' do
     it 'ログイン成功時にフラッシュメッセージが表示される' do
       user # ユーザーを作成
-      
+
       visit login_path
       fill_in 'メールアドレス', with: 'test@example.com'
       fill_in 'パスワード', with: 'Password123'
       click_button 'ログイン'
-      
+
       expect(page).to have_content('ログインしました')
     end
 
     it 'ログアウト時にフラッシュメッセージが表示される' do
       user # ユーザーを作成
-      
+
       visit login_path
       fill_in 'メールアドレス', with: 'test@example.com'
       fill_in 'パスワード', with: 'Password123'
       click_button 'ログイン'
-      
+
       click_button 'Logout'
-      
+
       expect(page).to have_content('ログアウトしました')
     end
   end
-end 
+end
