@@ -74,9 +74,14 @@
                   class: "flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider",
                   value: @review.rating || 0,
                   id: "review_rating_slider" %>
-              <span class="text-lg font-semibold text-gray-700 min-w-[3rem]">
-                <span id="rating-display"><%= @review.rating || 0 %></span>
-              </span>
+              <div class="flex items-center space-x-2">
+                <div class="flex items-center" id="rating-stars">
+                  <!-- 星の表示はJavaScriptで動的に更新 -->
+                </div>
+                <span class="text-lg font-semibold text-gray-700 min-w-[3rem]">
+                  <span id="rating-display"><%= @review.rating || 0 %></span>
+                </span>
+              </div>
             </div>
             <div class="flex justify-between text-xs text-gray-500 mt-1">
               <span>0</span>
@@ -135,11 +140,60 @@
 document.addEventListener('DOMContentLoaded', function() {
   const ratingSlider = document.getElementById('review_rating_slider');
   const ratingDisplay = document.getElementById('rating-display');
-  if (ratingSlider && ratingDisplay) {
+  const ratingStars = document.getElementById('rating-stars');
+  
+  if (ratingSlider && ratingDisplay && ratingStars) {
+    // 星を表示する関数
+    function updateStars(rating) {
+      ratingStars.innerHTML = '';
+      const fullStars = Math.floor(rating);
+      const hasHalfStar = rating % 1 !== 0;
+      
+      // 完全な星
+      for (let i = 0; i < fullStars; i++) {
+        ratingStars.innerHTML += `
+          <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+          </svg>
+        `;
+      }
+      
+      // 半分の星
+      if (hasHalfStar) {
+        ratingStars.innerHTML += `
+          <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+            <defs>
+              <linearGradient id="half-star">
+                <stop offset="50%" stop-color="currentColor"/>
+                <stop offset="50%" stop-color="#D1D5DB"/>
+              </linearGradient>
+            </defs>
+            <path fill="url(#half-star)" d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+          </svg>
+        `;
+      }
+      
+      // 空の星
+      const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+      for (let i = 0; i < emptyStars; i++) {
+        ratingStars.innerHTML += `
+          <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+          </svg>
+        `;
+      }
+    }
+    
     // 初期値反映
-    ratingDisplay.textContent = ratingSlider.value;
+    const initialRating = parseFloat(ratingSlider.value);
+    ratingDisplay.textContent = initialRating;
+    updateStars(initialRating);
+    
+    // スライダー変更時の処理
     ratingSlider.addEventListener('input', function() {
-      ratingDisplay.textContent = this.value;
+      const rating = parseFloat(this.value);
+      ratingDisplay.textContent = rating;
+      updateStars(rating);
     });
   }
 });
