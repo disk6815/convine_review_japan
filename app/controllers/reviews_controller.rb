@@ -2,6 +2,7 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!, except: [ :index, :show ]
   before_action :set_review, only: [ :show, :edit, :update, :destroy ]
   before_action :set_convenience_stores, only: [ :new, :create, :edit, :update ]
+  before_action :set_categories, only: [ :new, :create, :edit, :update ]
 
   def index
     @reviews = Review.includes(:user, :categories, :tastes, :regions).order(created_at: :desc)
@@ -48,6 +49,10 @@ class ReviewsController < ApplicationController
 
   def set_convenience_stores
     @convenience_stores = ConvenienceStore.all
+  end
+
+  def set_categories
+    @categories = Category.all
   end
 
   def review_params

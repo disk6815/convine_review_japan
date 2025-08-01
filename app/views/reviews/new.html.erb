@@ -18,7 +18,7 @@
 
       <!-- Form -->
       <div class="p-6">
-        <%= form_with model: @review, local: true, class: "space-y-6" do |form| %>
+        <%= form_with model: @review, local: true, class: "space-y-6", data: { controller: "select2" } do |form| %>
           <% if @review.errors.any? %>
             <div class="bg-red-50 border border-red-200 rounded-lg p-4">
               <div class="flex">
@@ -86,6 +86,46 @@
             <div class="flex justify-between text-xs text-gray-500 mt-1">
               <span>0</span>
               <span>5</span>
+            </div>
+          </div>
+
+          <!-- 商品カテゴリー -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+              商品カテゴリー
+            </label>
+            
+
+            
+            <!-- デスクトップ表示（Select2） -->
+            <div class="hidden lg:block">
+              <% if @categories.any? %>
+                <%= form.select :category_ids, 
+                    options_from_collection_for_select(@categories, :id, :name, @review.category_ids),
+                    { multiple: true, include_blank: false },
+                    { 
+                      class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors",
+                      data: { select2_target: "categorySelectDesktop" }
+                    } %>
+              <% else %>
+                <div class="text-gray-500 text-sm p-4 border border-gray-200 rounded-lg">カテゴリーがありません</div>
+              <% end %>
+            </div>
+            
+            <!-- スマホ表示（Select2） -->
+            <div class="lg:hidden">
+              <% if @categories.any? %>
+                <%= form.select :category_ids, 
+                    options_from_collection_for_select(@categories, :id, :name, @review.category_ids),
+                    { multiple: true, include_blank: false },
+                    { 
+                      class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors",
+                      data: { select2_target: "categorySelectMobile" }
+                    } %>
+              <% else %>
+                <div class="text-gray-500 text-sm p-4 border border-gray-200 rounded-lg">カテゴリーがありません</div>
+              <% end %>
+
             </div>
           </div>
 
@@ -203,8 +243,94 @@ function initializeRatingSlider() {
   }
 }
 
+// Select2初期化関数
+function initializeSelect2() {
+  console.log('=== Select2 Initialization Started ===');
+  console.log('Window width:', window.innerWidth);
+  
+  // デスクトップとスマホ両方でSelect2を初期化
+  const desktopSelect = document.querySelector('select[data-select2-target="categorySelectDesktop"]');
+  const mobileSelect = document.querySelector('select[data-select2-target="categorySelectMobile"]');
+  
+  console.log('Desktop select element:', desktopSelect);
+  console.log('Mobile select element:', mobileSelect);
+  
+  if (typeof $ !== 'undefined' && $.fn.select2) {
+    // デスクトップ用Select2初期化
+    if (desktopSelect) {
+      try {
+        // 既存のSelect2インスタンスを破棄
+        if ($(desktopSelect).hasClass('select2-hidden-accessible')) {
+          $(desktopSelect).select2('destroy');
+        }
+        
+        // Select2を初期化
+        $(desktopSelect).select2({
+          placeholder: "カテゴリーを選択してください",
+          allowClear: true,
+          width: '100%',
+          multiple: true,
+          closeOnSelect: false,
+          minimumResultsForSearch: Infinity, // 検索機能を無効化
+          language: {
+            noResults: function() {
+              return "結果が見つかりません";
+            }
+          }
+        });
+        
+        console.log('Desktop Select2 initialized successfully');
+      } catch (error) {
+        console.error('Error initializing Desktop Select2:', error);
+      }
+    }
+    
+    // スマホ用Select2初期化
+    if (mobileSelect) {
+      try {
+        // 既存のSelect2インスタンスを破棄
+        if ($(mobileSelect).hasClass('select2-hidden-accessible')) {
+          $(mobileSelect).select2('destroy');
+        }
+        
+        // Select2を初期化
+        $(mobileSelect).select2({
+          placeholder: "カテゴリーを選択してください",
+          allowClear: true,
+          width: '100%',
+          multiple: true,
+          closeOnSelect: false,
+          minimumResultsForSearch: Infinity, // 検索機能を無効化
+          language: {
+            noResults: function() {
+              return "結果が見つかりません";
+            }
+          }
+        });
+        
+        console.log('Mobile Select2 initialized successfully');
+      } catch (error) {
+        console.error('Error initializing Mobile Select2:', error);
+      }
+    }
+  } else {
+    console.error('jQuery or Select2 not loaded');
+  }
+}
+
 // DOMContentLoadedとTurboの両方に対応
-document.addEventListener('DOMContentLoaded', initializeRatingSlider);
-document.addEventListener('turbo:load', initializeRatingSlider);
-document.addEventListener('turbo:render', initializeRatingSlider);
+document.addEventListener('DOMContentLoaded', function() {
+  initializeRatingSlider();
+  initializeSelect2();
+});
+
+document.addEventListener('turbo:load', function() {
+  initializeRatingSlider();
+  initializeSelect2();
+});
+
+document.addEventListener('turbo:render', function() {
+  initializeRatingSlider();
+  initializeSelect2();
+});
 </script>
