@@ -1,15 +1,15 @@
-<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-8">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+    <div class="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
       <!-- Header -->
-      <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-8">
+      <div class="bg-gradient-to-r from-slate-800 via-blue-800 to-indigo-800 px-8 py-10">
         <div class="flex items-center justify-between">
           <div>
-            <h1 class="text-3xl font-bold text-white">レビュー編集</h1>
-            <p class="text-blue-100 mt-2">レビューを編集しましょう</p>
+            <h1 class="text-4xl font-bold text-white mb-2">レビュー編集</h1>
+            <p class="text-slate-200 text-lg">レビューを編集しましょう</p>
           </div>
-          <%= link_to reviews_path, class: "text-blue-100 hover:text-white transition-colors" do %>
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <%= link_to reviews_path, class: "text-slate-200 hover:text-white transition-all duration-300 hover:scale-110" do %>
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
             </svg>
           <% end %>
@@ -45,42 +45,57 @@
 
           <!-- コンビニ名（選択式） -->
           <div>
-            <label for="review_convenience_store_name" class="block text-sm font-medium text-gray-700 mb-2">
-              コンビニ名 <span class="text-red-500">*</span>
+            <label for="review_convenience_store_name" class="block text-sm font-semibold text-slate-700 mb-3">
+              コンビニ名 <span class="text-red-500 font-bold">*</span>
             </label>
             <%= form.select :convenience_store_name, options_from_collection_for_select(@convenience_stores, :name, :name, @review.convenience_store_name),
                 { prompt: '選択してください' },
-                class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" %>
+                class: "w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white/80 backdrop-blur-sm" %>
           </div>
 
           <!-- 商品名 -->
           <div>
-            <label for="review_product_name" class="block text-sm font-medium text-gray-700 mb-2">
-              商品名 <span class="text-red-500">*</span>
+            <label for="review_product_name" class="block text-sm font-semibold text-slate-700 mb-3">
+              商品名 <span class="text-red-500 font-bold">*</span>
             </label>
             <%= form.text_field :product_name, 
-                class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors",
+                class: "w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white/80 backdrop-blur-sm",
                 placeholder: "例: おにぎり 鮭" %>
           </div>
 
           <!-- 総合評価 -->
           <div>
-            <label for="review_rating" class="block text-sm font-medium text-gray-700 mb-2">
-              総合評価 <span class="text-red-500">*</span>
+            <label for="review_rating" class="block text-sm font-semibold text-slate-700 mb-3">
+              総合評価 <span class="text-red-500 font-bold">*</span>
             </label>
-            <div class="flex items-center space-x-4">
-              <%= form.range_field :rating, 
-                  min: 0, max: 5, step: 0.5,
-                  class: "flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider",
-                  value: @review.rating || 0,
-                  id: "review_rating_slider" %>
-              <span class="text-lg font-semibold text-gray-700 min-w-[3rem]">
-                <span id="rating-display"><%= @review.rating || 0 %></span>
-              </span>
-            </div>
-            <div class="flex justify-between text-xs text-gray-500 mt-1">
-              <span>0</span>
-              <span>5</span>
+            <div class="space-y-4">
+              <!-- スライダー -->
+              <div class="relative">
+                <%= form.range_field :rating, 
+                    min: 0, max: 5, step: 0.5,
+                    class: "w-full h-6 rounded-xl cursor-pointer slider",
+                    value: @review.rating || 0,
+                    id: "review_rating_slider" %>
+                <!-- スライダーの目盛り -->
+                <div class="flex justify-between text-xs text-slate-500 mt-2 font-medium">
+                  <span>0</span>
+                  <span>1</span>
+                  <span>2</span>
+                  <span>3</span>
+                  <span>4</span>
+                  <span>5</span>
+                </div>
+              </div>
+              
+              <!-- 評価表示 -->
+              <div class="flex items-center justify-center space-x-2">
+                <span class="text-lg text-slate-700">
+                  <span id="rating-display"><%= @review.rating || 0 %></span>
+                </span>
+                <span class="text-lg text-slate-500">/ 5</span>
+              </div>
+              
+              
             </div>
           </div>
 
@@ -155,11 +170,38 @@ document.addEventListener('DOMContentLoaded', function() {
   
   const ratingSlider = document.getElementById('review_rating_slider');
   const ratingDisplay = document.getElementById('rating-display');
+  const ratingStars = document.getElementById('rating-stars');
+  
+  function updateRatingVisualization(value) {
+    if (ratingDisplay) {
+      ratingDisplay.textContent = value;
+    }
+    
+    if (ratingStars) {
+      const stars = ratingStars.querySelectorAll('[data-star]');
+      stars.forEach((star, index) => {
+        const starValue = index + 1;
+        const starElement = star;
+        
+        if (value >= starValue) {
+          // 完全に塗りつぶし
+          starElement.className = 'w-8 h-8 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 border-2 border-yellow-400 flex items-center justify-center text-sm font-bold text-white transition-all duration-300 shadow-lg';
+        } else if (value >= starValue - 0.5) {
+          // 半分塗りつぶし
+          starElement.className = 'w-8 h-8 rounded-full bg-gradient-to-r from-yellow-400/50 to-orange-500/50 border-2 border-yellow-400/50 flex items-center justify-center text-sm font-bold text-white transition-all duration-300 shadow-md';
+        } else {
+          // 未選択
+          starElement.className = 'w-8 h-8 rounded-full border-2 border-slate-300 flex items-center justify-center text-sm font-bold text-slate-400 transition-all duration-300';
+        }
+      });
+    }
+  }
+  
   if (ratingSlider && ratingDisplay) {
     // 初期値反映
-    ratingDisplay.textContent = ratingSlider.value;
+    updateRatingVisualization(ratingSlider.value);
     ratingSlider.addEventListener('input', function() {
-      ratingDisplay.textContent = this.value;
+      updateRatingVisualization(this.value);
     });
   }
   
@@ -177,7 +219,8 @@ document.addEventListener('DOMContentLoaded', function() {
           placeholder: 'カテゴリを選択してください',
           allowClear: true,
           width: '100%',
-          multiple: true
+          multiple: true,
+          closeOnSelect: false
         });
         console.log('Select2 initialized from inline script');
       } catch (e) {
@@ -207,7 +250,8 @@ window.addEventListener('load', function() {
         placeholder: 'カテゴリを選択してください',
         allowClear: true,
         width: '100%',
-        multiple: true
+        multiple: true,
+        closeOnSelect: false
       });
       console.log('Select2 initialized on window load');
     } catch (e) {
@@ -234,7 +278,8 @@ document.addEventListener('turbo:load', function() {
       placeholder: 'カテゴリを選択してください',
       allowClear: true,
       width: '100%',
-      multiple: true
+      multiple: true,
+      closeOnSelect: false
     });
     console.log('Select2 initialized on turbo load');
   }
@@ -257,7 +302,8 @@ document.addEventListener('turbo:render', function() {
       placeholder: 'カテゴリを選択してください',
       allowClear: true,
       width: '100%',
-      multiple: true
+      multiple: true,
+      closeOnSelect: false
     });
     console.log('Select2 initialized on turbo render');
   }
