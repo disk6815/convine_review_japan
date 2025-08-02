@@ -1,17 +1,18 @@
+#!/usr/bin/env bash
+# exit on error
 set -o errexit
 
-# Set package managers to npm and disable yarn
-export JSBUNDLING_PACKAGE_MANAGER=npm
-export CSSBUNDLING_PACKAGE_MANAGER=npm
-export YARN_IGNORE_PATH=1
-export YARN_IGNORE_ENGINES=1
-
-# Remove yarn.lock if it exists to force npm
-rm -f yarn.lock
-
+# Install dependencies
 bundle install
-npm install
+
+# Install npm dependencies with specific flags for Render
+npm install --no-optional --production=false
+
+# Build assets
+npm run build
+npm run build:css
+
+# Run database migrations
 bundle exec rails assets:precompile
 bundle exec rails assets:clean
 bundle exec rails db:migrate
-bundle exec rails db:seed
