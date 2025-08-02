@@ -145,18 +145,39 @@
 <script>
 console.log('Script tag loaded');
 
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOMContentLoaded event fired');
+// スライダー初期化関数
+function initializeRatingSlider() {
+  const ratingSlider = document.getElementById('review_rating_slider');
+  const ratingDisplay = document.getElementById('rating-display');
   
+  if (ratingSlider && ratingDisplay) {
+    console.log('Rating slider found, initializing...');
+    // 初期値反映
+    ratingDisplay.textContent = ratingSlider.value;
+    
+    // 既存のイベントリスナーを削除（重複防止）
+    ratingSlider.removeEventListener('input', updateRatingDisplay);
+    // 新しいイベントリスナーを追加
+    ratingSlider.addEventListener('input', updateRatingDisplay);
+    
+    console.log('Rating slider initialized successfully');
+  } else {
+    console.log('Rating slider elements not found');
+  }
+}
+
+// 評価表示更新関数
+function updateRatingDisplay() {
   const ratingSlider = document.getElementById('review_rating_slider');
   const ratingDisplay = document.getElementById('rating-display');
   if (ratingSlider && ratingDisplay) {
-    // 初期値反映
     ratingDisplay.textContent = ratingSlider.value;
-    ratingSlider.addEventListener('input', function() {
-      ratingDisplay.textContent = this.value;
-    });
   }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOMContentLoaded event fired');
+  initializeRatingSlider();
   
   // Select2初期化
   console.log('Inline script: DOMContentLoaded fired');
@@ -194,6 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // ページ読み込み完了時にも実行
 window.addEventListener('load', function() {
   console.log('Window load event fired');
+  initializeRatingSlider();
   
   if (typeof $ !== 'undefined' && $.fn && $.fn.select2) {
     console.log('Initializing select2 on window load');
@@ -214,6 +236,7 @@ window.addEventListener('load', function() {
 // Turboイベントに対応
 document.addEventListener('turbo:load', function() {
   console.log('Turbo load event fired');
+  initializeRatingSlider();
   
   if (typeof $ !== 'undefined' && $.fn && $.fn.select2) {
     console.log('Initializing select2 on turbo load');
@@ -237,6 +260,7 @@ document.addEventListener('turbo:load', function() {
 
 document.addEventListener('turbo:render', function() {
   console.log('Turbo render event fired');
+  initializeRatingSlider();
   
   if (typeof $ !== 'undefined' && $.fn && $.fn.select2) {
     console.log('Initializing select2 on turbo render');
