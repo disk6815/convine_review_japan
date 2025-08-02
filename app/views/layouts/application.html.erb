@@ -15,7 +15,15 @@
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "glassmorphism", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "select2", "data-turbo-track": "reload" %>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <script>
+      console.log('Layout script loaded');
+      console.log('jQuery version:', typeof $ !== 'undefined' ? $.fn.jquery : 'not loaded');
+      console.log('Select2 available:', typeof $.fn !== 'undefined' && $.fn.select2 ? 'yes' : 'no');
+    </script>
   </head>
 
   <body>

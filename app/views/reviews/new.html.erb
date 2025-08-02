@@ -84,6 +84,17 @@
             </div>
           </div>
 
+          <!-- カテゴリ選択 -->
+          <div>
+            <label for="review_category_ids" class="block text-sm font-medium text-gray-700 mb-2">
+              カテゴリ
+            </label>
+            <%= form.select :category_ids, 
+                options_from_collection_for_select(Category.all, :id, :name), 
+                { prompt: 'カテゴリを選択してください' }, 
+                { multiple: true, class: "select2" } %>
+          </div>
+
           <!-- レビュー本文 -->
           <div>
             <label for="review_body" class="block text-sm font-medium text-gray-700 mb-2">
@@ -132,7 +143,11 @@
 </div>
 
 <script>
+console.log('Script tag loaded');
+
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOMContentLoaded event fired');
+  
   const ratingSlider = document.getElementById('review_rating_slider');
   const ratingDisplay = document.getElementById('rating-display');
   if (ratingSlider && ratingDisplay) {
@@ -141,6 +156,105 @@ document.addEventListener('DOMContentLoaded', function() {
     ratingSlider.addEventListener('input', function() {
       ratingDisplay.textContent = this.value;
     });
+  }
+  
+  // Select2初期化
+  console.log('Inline script: DOMContentLoaded fired');
+  console.log('jQuery available:', typeof $ !== 'undefined');
+  console.log('Select2 available:', typeof $ !== 'undefined' && $.fn && $.fn.select2);
+  
+  // jQueryが利用可能になるまで待機
+  function waitForJQuery() {
+    if (typeof $ !== 'undefined' && $.fn && $.fn.select2) {
+      console.log('jQuery is available in inline script');
+      try {
+        $('.select2').select2({
+          placeholder: 'カテゴリを選択してください',
+          allowClear: true,
+          width: '100%',
+          multiple: true
+        });
+        console.log('Select2 initialized from inline script');
+      } catch (e) {
+        console.error('Select2 initialization error:', e);
+      }
+    } else {
+      console.log('jQuery is not available yet, retrying...');
+      setTimeout(waitForJQuery, 100);
+    }
+  }
+  
+  // 即座に実行
+  waitForJQuery();
+  
+  // バックアップとして少し遅れて実行
+  setTimeout(waitForJQuery, 1000);
+});
+
+// ページ読み込み完了時にも実行
+window.addEventListener('load', function() {
+  console.log('Window load event fired');
+  
+  if (typeof $ !== 'undefined' && $.fn && $.fn.select2) {
+    console.log('Initializing select2 on window load');
+    try {
+      $('.select2').select2({
+        placeholder: 'カテゴリを選択してください',
+        allowClear: true,
+        width: '100%',
+        multiple: true
+      });
+      console.log('Select2 initialized on window load');
+    } catch (e) {
+      console.error('Select2 initialization error on window load:', e);
+    }
+  }
+});
+
+// Turboイベントに対応
+document.addEventListener('turbo:load', function() {
+  console.log('Turbo load event fired');
+  
+  if (typeof $ !== 'undefined' && $.fn && $.fn.select2) {
+    console.log('Initializing select2 on turbo load');
+    try {
+      // 既存のselect2インスタンスを破棄
+      $('.select2').select2('destroy');
+    } catch (e) {
+      console.log('Select2 destroy error:', e);
+    }
+    
+    // 新しいselect2インスタンスを初期化
+    $('.select2').select2({
+      placeholder: 'カテゴリを選択してください',
+      allowClear: true,
+      width: '100%',
+      multiple: true
+    });
+    console.log('Select2 initialized on turbo load');
+  }
+});
+
+document.addEventListener('turbo:render', function() {
+  console.log('Turbo render event fired');
+  
+  if (typeof $ !== 'undefined' && $.fn && $.fn.select2) {
+    console.log('Initializing select2 on turbo render');
+    try {
+      // 既存のselect2インスタンスを破棄
+      $('.select2').select2('destroy');
+    } catch (e) {
+      console.log('Select2 destroy error:', e);
+    }
+    
+    // 新しいselect2インスタンスを初期化
+    $('.select2').select2({
+      placeholder: 'カテゴリを選択してください',
+      allowClear: true,
+      width: '100%',
+      multiple: true
+    });
+    console.log('Select2 initialized on turbo render');
   }
 });
 </script>
