@@ -90,7 +90,7 @@
               カテゴリ
             </label>
             <%= form.select :category_ids, 
-                options_from_collection_for_select(Category.all, :id, :name), 
+                options_from_collection_for_select(Category.all, :id, :name, @review.category_ids), 
                 { prompt: 'カテゴリを選択してください' }, 
                 { multiple: true, class: "select2" } %>
           </div>
