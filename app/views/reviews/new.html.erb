@@ -90,7 +90,7 @@
               カテゴリ
             </label>
             <%= form.select :category_ids, 
-                options_from_collection_for_select(Category.all, :id, :name), 
+                options_from_collection_for_select(Category.all, :id, :name, @review.category_ids), 
                 { prompt: 'カテゴリを選択してください' }, 
                 { multiple: true, class: "select2" } %>
           </div>
@@ -193,7 +193,8 @@ document.addEventListener('DOMContentLoaded', function() {
           placeholder: 'カテゴリを選択してください',
           allowClear: true,
           width: '100%',
-          multiple: true
+          multiple: true,
+          closeOnSelect: false
         });
         console.log('Select2 initialized from inline script');
       } catch (e) {
@@ -224,7 +225,8 @@ window.addEventListener('load', function() {
         placeholder: 'カテゴリを選択してください',
         allowClear: true,
         width: '100%',
-        multiple: true
+        multiple: true,
+        closeOnSelect: false
       });
       console.log('Select2 initialized on window load');
     } catch (e) {
@@ -252,7 +254,8 @@ document.addEventListener('turbo:load', function() {
       placeholder: 'カテゴリを選択してください',
       allowClear: true,
       width: '100%',
-      multiple: true
+      multiple: true,
+      closeOnSelect: false
     });
     console.log('Select2 initialized on turbo load');
   }
@@ -276,7 +279,8 @@ document.addEventListener('turbo:render', function() {
       placeholder: 'カテゴリを選択してください',
       allowClear: true,
       width: '100%',
-      multiple: true
+      multiple: true,
+      closeOnSelect: false
     });
     console.log('Select2 initialized on turbo render');
   }
