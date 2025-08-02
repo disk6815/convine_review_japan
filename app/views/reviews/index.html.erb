@@ -81,31 +81,60 @@
                 </h3>
               </div>
 
-              <!-- Categories -->
-              <div class="mb-4">
-                <h4 class="text-sm font-medium text-gray-700 mb-2">カテゴリー</h4>
-                <div class="flex flex-wrap gap-2">
-                  <% if review.categories.any? %>
-                    <% review.categories.each do |category| %>
-                      <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-green-100 text-green-800">
-                        <%= category.name %>
+              <!-- Categories and Tastes -->
+              <div class="mb-4 space-y-3">
+                <!-- Categories -->
+                <div>
+                  <h4 class="text-sm font-medium text-gray-700 mb-2">カテゴリー</h4>
+                  <div class="flex flex-wrap gap-2">
+                    <% if review.categories.any? %>
+                      <% review.categories.each do |category| %>
+                        <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-green-100 text-green-800">
+                          <%= category.name %>
+                        </span>
+                      <% end %>
+                    <% else %>
+                      <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-200 text-gray-700">
+                        なし
                       </span>
                     <% end %>
-                  <% else %>
-                    <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-200 text-gray-700">
-                      なし
-                    </span>
-                  <% end %>
-                  <% review.tastes.each do |taste| %>
-                    <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-purple-100 text-purple-800">
-                      <%= taste.name %>
-                    </span>
-                  <% end %>
-                  <% review.regions.each do |region| %>
-                    <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-orange-100 text-orange-800">
-                      <%= region.name %>
-                    </span>
-                  <% end %>
+                  </div>
+                </div>
+
+                <!-- Tastes -->
+                <div>
+                  <h4 class="text-sm font-medium text-gray-700 mb-2">味覚</h4>
+                  <div class="flex flex-wrap gap-2">
+                    <% if review.tastes.any? %>
+                      <% review.tastes.each do |taste| %>
+                        <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-purple-100 text-purple-800">
+                          <%= taste.name %>
+                        </span>
+                      <% end %>
+                    <% else %>
+                      <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-200 text-gray-700">
+                        なし
+                      </span>
+                    <% end %>
+                  </div>
+                </div>
+
+                <!-- Regions -->
+                <div>
+                  <h4 class="text-sm font-medium text-gray-700 mb-2">地域</h4>
+                  <div class="flex flex-wrap gap-2">
+                    <% if review.regions.any? %>
+                      <% review.regions.each do |region| %>
+                        <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-orange-100 text-orange-800">
+                          <%= region.name %>
+                        </span>
+                      <% end %>
+                    <% else %>
+                      <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-200 text-gray-700">
+                        なし
+                      </span>
+                    <% end %>
+                  </div>
                 </div>
               </div>
 

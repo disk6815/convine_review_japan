@@ -95,6 +95,17 @@
                 { multiple: true, class: "select2" } %>
           </div>
 
+          <!-- 味覚選択 -->
+          <div>
+            <label for="review_taste_ids" class="block text-sm font-medium text-gray-700 mb-2">
+              味覚
+            </label>
+            <%= form.select :taste_ids, 
+                options_from_collection_for_select(Taste.all, :id, :name, @review.taste_ids), 
+                { prompt: '味覚を選択してください' }, 
+                { multiple: true, class: "select2" } %>
+          </div>
+
           <!-- レビュー本文 -->
           <div>
             <label for="review_body" class="block text-sm font-medium text-gray-700 mb-2">
@@ -190,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('jQuery is available in inline script');
       try {
         $('.select2').select2({
-          placeholder: 'カテゴリを選択してください',
+          placeholder: '選択してください',
           allowClear: true,
           width: '100%',
           multiple: true,
@@ -222,7 +233,7 @@ window.addEventListener('load', function() {
     console.log('Initializing select2 on window load');
     try {
       $('.select2').select2({
-        placeholder: 'カテゴリを選択してください',
+        placeholder: '選択してください',
         allowClear: true,
         width: '100%',
         multiple: true,
@@ -251,7 +262,7 @@ document.addEventListener('turbo:load', function() {
     
     // 新しいselect2インスタンスを初期化
     $('.select2').select2({
-      placeholder: 'カテゴリを選択してください',
+      placeholder: '選択してください',
       allowClear: true,
       width: '100%',
       multiple: true,
@@ -276,7 +287,7 @@ document.addEventListener('turbo:render', function() {
     
     // 新しいselect2インスタンスを初期化
     $('.select2').select2({
-      placeholder: 'カテゴリを選択してください',
+      placeholder: '選択してください',
       allowClear: true,
       width: '100%',
       multiple: true,
