@@ -106,6 +106,17 @@
                 { multiple: true, class: "select2" } %>
           </div>
 
+          <!-- 地域選択 -->
+          <div>
+            <label for="review_region_ids" class="block text-sm font-medium text-gray-700 mb-2">
+              地域
+            </label>
+            <%= form.select :region_ids, 
+                options_from_collection_for_select(Region.all, :id, :name, @review.region_ids), 
+                { prompt: '地域を選択してください' }, 
+                { multiple: true, class: "select2" } %>
+          </div>
+
           <!-- レビュー本文 -->
           <div>
             <label for="review_body" class="block text-sm font-medium text-gray-700 mb-2">
