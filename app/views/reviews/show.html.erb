@@ -65,6 +65,18 @@
           <h2 class="text-2xl font-bold text-gray-900 mb-4">
             <%= @review.product_name %>
           </h2>
+          
+          <!-- 価格表示 -->
+          <div class="mb-4">
+            <p class="text-lg text-gray-700">
+              <span class="font-semibold">価格：</span>
+              <% if @review.price && @review.price > 0 %>
+                <%= @review.price %>円
+              <% else %>
+                価格未設定
+              <% end %>
+            </p>
+          </div>
         </div>
 
         <!-- Review Body -->

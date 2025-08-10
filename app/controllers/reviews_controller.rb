@@ -55,6 +55,7 @@ class ReviewsController < ApplicationController
       :convenience_store_name,
       :product_name,
       :rating,
+      :price,
       :body,
       :image,
       category_ids: [],

@@ -14,6 +14,7 @@ class Review < ApplicationRecord
   validates :convenience_store_name, presence: true
   validates :product_name, presence: true
   validates :rating, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 5 }
+  validates :price, numericality: { greater_than_or_equal_to: 0, only_integer: true }, allow_nil: true
 
   accepts_nested_attributes_for :review_categories, allow_destroy: true
   accepts_nested_attributes_for :review_tastes, allow_destroy: true

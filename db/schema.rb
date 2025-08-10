@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_08_01_045455) do
+ActiveRecord::Schema[7.2].define(version: 2025_08_10_061758) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -106,6 +106,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_01_045455) do
     t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "crop_x"
+    t.float "crop_y"
+    t.float "crop_width"
+    t.float "crop_height"
+    t.integer "price", default: 0, null: false
     t.index ["rating"], name: "index_reviews_on_rating"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
