@@ -84,6 +84,21 @@
             </div>
           </div>
 
+          <!-- 価格 -->
+          <div>
+            <label for="review_price" class="block text-sm font-medium text-gray-700 mb-2">
+              価格
+            </label>
+            <%= form.number_field :price, 
+                class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors",
+                placeholder: "おおよその値段",
+                min: 0,
+                step: 1,
+                pattern: "[0-9]*",
+                inputmode: "numeric" %>
+            <p class="text-sm text-gray-500 mt-1">入力がない場合は0円として扱われます</p>
+          </div>
+
           <!-- カテゴリ選択 -->
           <div>
             <label for="review_category_ids" class="block text-sm font-medium text-gray-700 mb-2">
@@ -200,6 +215,7 @@ function updateRatingDisplay() {
 document.addEventListener('DOMContentLoaded', function() {
   console.log('DOMContentLoaded event fired');
   initializeRatingSlider();
+  initializePriceField();
   
   // Select2初期化
   console.log('Inline script: DOMContentLoaded fired');
@@ -239,6 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('load', function() {
   console.log('Window load event fired');
   initializeRatingSlider();
+  initializePriceField();
   
   if (typeof $ !== 'undefined' && $.fn && $.fn.select2) {
     console.log('Initializing select2 on window load');
@@ -261,6 +278,7 @@ window.addEventListener('load', function() {
 document.addEventListener('turbo:load', function() {
   console.log('Turbo load event fired');
   initializeRatingSlider();
+  initializePriceField();
   
   if (typeof $ !== 'undefined' && $.fn && $.fn.select2) {
     console.log('Initializing select2 on turbo load');
@@ -286,6 +304,7 @@ document.addEventListener('turbo:load', function() {
 document.addEventListener('turbo:render', function() {
   console.log('Turbo render event fired');
   initializeRatingSlider();
+  initializePriceField();
   
   if (typeof $ !== 'undefined' && $.fn && $.fn.select2) {
     console.log('Initializing select2 on turbo render');
@@ -307,4 +326,37 @@ document.addEventListener('turbo:render', function() {
     console.log('Select2 initialized on turbo render');
   }
 });
+
+// 価格フィールド初期化関数
+function initializePriceField() {
+  const priceField = document.getElementById('review_price');
+  
+  if (priceField) {
+    console.log('Price field found, initializing...');
+    
+    // 半角数字のみ入力可能
+    priceField.addEventListener('input', function(e) {
+      // 全角数字を半角数字に変換
+      let value = e.target.value.replace(/[０-９]/g, function(s) {
+        return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+      });
+      
+      // 数字以外の文字を除去
+      value = value.replace(/[^0-9]/g, '');
+      
+      e.target.value = value;
+    });
+    
+    // フォーカスアウト時に空の場合は0に設定
+    priceField.addEventListener('blur', function(e) {
+      if (e.target.value === '') {
+        e.target.value = '0';
+      }
+    });
+    
+    console.log('Price field initialized successfully');
+  } else {
+    console.log('Price field not found');
+  }
+}
 </script>
