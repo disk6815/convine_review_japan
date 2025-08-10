@@ -68,13 +68,14 @@
           
           <!-- 価格表示 -->
           <div class="mb-4">
-            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+            <p class="text-lg text-gray-700">
+              <span class="font-semibold">価格：</span>
               <% if @review.price && @review.price > 0 %>
                 <%= @review.price %>円
               <% else %>
                 価格未設定
               <% end %>
-            </span>
+            </p>
           </div>
         </div>
 
